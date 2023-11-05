@@ -1,0 +1,9 @@
+<form action="/update/{{contacto['email']}}", method="POST">
+
+    <input type="text" name="nombre" placeholder="Nombre", value="{{contacto['nombre']}}">
+    <input type="text" name="telefono"  placeholder="Telefono"  value="{{contacto['telefono']}}">
+    <input type="text" name="email" placeholder="Email"  value="{{contacto['email']}}">
+    <button type="submit">
+        Enviar
+    </button>
+</form>
