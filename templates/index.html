@@ -1,81 +1,91 @@
-{% with messages = get_flashed_messages() %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
 
-{% if messages %}
+    {% with messages = get_flashed_messages() %}
 
-{% for message in messages %}
-    <p>{{ message }}</p>
-{% endfor %}
+    {% if messages %}
 
-{% endif %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
 
-{% endwith %}
+    {% endif %}
 
-<form action="/add_contact", method="POST">
+    {% endwith %}
 
-    <input type="text" name="nombre" placeholder="Nombre">
-    <input type="text" name="telefono"  placeholder="Telefono">
-    <input type="text" name="email" placeholder="Email">
-    <button type="submit">
-        Enviar
-    </button>
-</form>
+    <form action="/add_contact", method="POST">
 
-
-
-
-<form method="post" action="{{ url_for('buscarContacto') }}">
-    <input type="text" name="email" id="email "placeholder="email">
-    <input type="submit" value="Buscar" class="boton">
-</form>
-<hr size="10" color="black">
-{% if contacto_buscados %}
-<table>
-    <thead>
-        <tr>
-            <td>Email</td>
-            <td>Nombre</td>
-            <td>Telefono</td>
-            <td>Operaciones</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{contacto_buscados['email']}}</td>
-            <td>{{contacto_buscados['nombre']}}</td>
-            <td>{{contacto_buscados['telefono']}}</td>
-            <td>
-                <a href="/edit/{{contacto_buscados['email']}}">Editar</a>
-                <a href="/delete/{{contacto_buscados['email']}}">Eliminar</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<a href="/">Limpiar_busqueda</a>
-<hr size="10" color="black">
-{% endif %}
+        <input type="text" name="nombre" placeholder="Nombre">
+        <input type="text" name="telefono"  placeholder="Telefono">
+        <input type="text" name="email" placeholder="Email">
+        <button type="submit">
+            Enviar
+        </button>
+    </form>
 
 
-<table>
-    <thead>
-        <tr>
-            <td>Email</td>
-            <td>Nombre</td>
-            <td>Telefono</td>
-            <td>Operaciones</td>
-        </tr>
-    </thead>
-    <tbody>
-        {% for contacto in contactos %}
-        <tr>
-            <td>{{contacto['email']}}</td>
-            <td>{{contacto['nombre']}}</td>
-            <td>{{contacto['telefono']}}</td>
-            <td>
-                <a href="/edit/{{contacto['email']}}">Editar</a>
-                <a href="/delete/{{contacto['email']}}">Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 
+
+    <form method="post" action="{{ url_for('buscarContacto') }}">
+        <input type="text" name="email" id="email "placeholder="email">
+        <input type="submit" value="Buscar" class="boton">
+    </form>
+    <hr size="10" color="black">
+    {% if contacto_buscados %}
+        <table>
+            <thead>
+                <tr>
+                    <td>Email</td>
+                    <td>Nombre</td>
+                    <td>Telefono</td>
+                    <td>Operaciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{contacto_buscados['email']}}</td>
+                    <td>{{contacto_buscados['nombre']}}</td>
+                    <td>{{contacto_buscados['telefono']}}</td>
+                    <td>
+                        <a href="/edit/{{contacto_buscados['email']}}">Editar</a>
+                        <a href="/delete/{{contacto_buscados['email']}}">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/">Limpiar_busqueda</a>
+        <hr size="10" color="black">
+        {% endif %}
+
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Email</td>
+                    <td>Nombre</td>
+                    <td>Telefono</td>
+                    <td>Operaciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contacto in contactos %}
+                <tr>
+                    <td>{{contacto['email']}}</td>
+                    <td>{{contacto['nombre']}}</td>
+                    <td>{{contacto['telefono']}}</td>
+                    <td>
+                        <a href="/edit/{{contacto['email']}}">Editar</a>
+                        <a href="/delete/{{contacto['email']}}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
