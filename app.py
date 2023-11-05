@@ -78,8 +78,7 @@ def delete_contact(email):
     return redirect(url_for('index'))
 
 
-
-if __name__ == '__main__':
-    app.run()
-    # Solo en local
+# Solo local
+# if __name__ == '__main__':
+    # app.run()
     # app.run(port = 8080, debug = True)
