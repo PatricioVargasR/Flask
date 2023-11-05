@@ -79,6 +79,7 @@ def delete_contact(email):
 
 
 
-# Solo en local
-# if __name__ == '__main__':
+if __name__ == '__main__':
+    app.run()
+    # Solo en local
     # app.run(port = 8080, debug = True)
