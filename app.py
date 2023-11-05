@@ -16,14 +16,14 @@ app.secret_key = 'mysecretkey'
     # Agregar diseño
 
 @app.route('/')
-def index():
+async def index():
     contactos  = requests.get(URI)
     contactos_json = json.loads(contactos.text)
     print(contactos_json)
     return render_template('index.html', contactos = contactos_json)
 
 @app.route('/add_contact', methods=["POST"])
-def add_contact():
+async def add_contact():
     if request.method == "POST":
         nombre = request.form['nombre']
         telefono = request.form['telefono']
@@ -36,7 +36,7 @@ def add_contact():
         return redirect(url_for('index'))
 
 @app.route('/buscarContacto', methods=["GET","POST"])
-def buscarContacto():
+async def buscarContacto():
     if request.method == "POST":
         email = request.form['email']
         # Obtenemos el registro a buscar
@@ -51,13 +51,13 @@ def buscarContacto():
 
 
 @app.route('/edit/<string:email>')
-def get_contact(email):
+async def get_contact(email):
     contactos  = requests.get(f"{URI}/{email}")
     contactos_json = json.loads(contactos.text)
     return render_template('edit_contact.html', contacto = contactos_json)
 
 @app.route('/update/<string:email>', methods=['POST'])
-def update_contact(email):
+async def update_contact(email):
     if request.method == "POST":
         nombre = request.form['nombre']
         telefono = request.form['telefono']
@@ -71,7 +71,7 @@ def update_contact(email):
 
 
 @app.route('/delete/<string:email>')
-def delete_contact(email):
+async def delete_contact(email):
     # print(email)
     requests.delete(f'{URI}/{email}')
     flash('Se ha eliminado el registro')
