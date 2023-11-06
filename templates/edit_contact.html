@@ -6,14 +6,17 @@
     <title>Document</title>
 </head>
     <body>
+        <center><h1>Actualizar Contacto</h1>
         <form action="/update/{{contacto['email']}}", method="POST">
 
-            <input type="text" name="nombre" placeholder="Nombre", value="{{contacto['nombre']}}">
-            <input type="text" name="telefono"  placeholder="Telefono"  value="{{contacto['telefono']}}">
-            <input type="text" name="email" placeholder="Email"  value="{{contacto['email']}}">
-            <button type="submit">
+            <p><input type="text" name="nombre" placeholder="Nombre", value="{{contacto['nombre']}}"></p>
+            <p><input type="text" name="telefono"  placeholder="Telefono"  value="{{contacto['telefono']}}"></p>
+            <p><input type="text" name="email" placeholder="Email"  value="{{contacto['email']}}"></p>
+            <p><button type="submit">
                 Enviar
-            </button>
-        </form>        
+            </button></p>
+        </form>
+        <a href="/">Cancelar</a>
+        </center>
     </body>
 </html>

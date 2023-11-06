@@ -16,14 +16,14 @@ app.secret_key = 'mysecretkey'
     # Agregar diseño
 
 @app.route('/')
-async def index():
+def index():
     contactos  = requests.get(URI)
     contactos_json = json.loads(contactos.text)
     print(contactos_json)
     return render_template('index.html', contactos = contactos_json)
 
 @app.route('/add_contact', methods=["POST"])
-async def add_contact():
+def add_contact():
     if request.method == "POST":
         nombre = request.form['nombre']
         telefono = request.form['telefono']
@@ -36,7 +36,7 @@ async def add_contact():
         return redirect(url_for('index'))
 
 @app.route('/buscarContacto', methods=["GET","POST"])
-async def buscarContacto():
+def buscarContacto():
     if request.method == "POST":
         email = request.form['email']
         # Obtenemos el registro a buscar
@@ -46,18 +46,25 @@ async def buscarContacto():
         # Obtenemos todos los registros
         contactos = requests.get(URI)
         contactos_json = json.loads(contactos.text)
-        print(contacto_buscado)
+        # print(contacto_buscado)
         return render_template('index.html', contactos = contactos_json, contacto_buscados = contactos_buscado_json)
 
 
 @app.route('/edit/<string:email>')
-async def get_contact(email):
+def get_contact(email):
     contactos  = requests.get(f"{URI}/{email}")
     contactos_json = json.loads(contactos.text)
     return render_template('edit_contact.html', contacto = contactos_json)
 
+
+@app.route('/see/<string:email>')
+def watch_contact(email):
+    contactos  = requests.get(f"{URI}/{email}")
+    contactos_json = json.loads(contactos.text)
+    return render_template('contacto.html', contacto = contactos_json)
+
 @app.route('/update/<string:email>', methods=['POST'])
-async def update_contact(email):
+def update_contact(email):
     if request.method == "POST":
         nombre = request.form['nombre']
         telefono = request.form['telefono']
@@ -71,7 +78,7 @@ async def update_contact(email):
 
 
 @app.route('/delete/<string:email>')
-async def delete_contact(email):
+def delete_contact(email):
     # print(email)
     requests.delete(f'{URI}/{email}')
     flash('Se ha eliminado el registro')
@@ -79,6 +86,6 @@ async def delete_contact(email):
 
 
 # Solo local
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # app.run()
-    # app.run(port = 8080, debug = True)
+    app.run(port = 8080, debug = True)

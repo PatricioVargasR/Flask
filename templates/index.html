@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
     <body>
+    <center>
 
     {% with messages = get_flashed_messages() %}
 
@@ -19,6 +20,7 @@
 
     {% endwith %}
 
+    <h1><b>Insertar Contactos</b></h1>
     <form action="/add_contact", method="POST">
 
         <input type="text" name="nombre" placeholder="Nombre">
@@ -29,6 +31,7 @@
         </button>
     </form>
     <hr size="10" color="black">
+    <h1><b>Buscar Contacto</b></h1>
     <form method="post" action="{{ url_for('buscarContacto') }}">
         <input type="text" name="email" id="email "placeholder="email">
         <input type="submit" value="Buscar" class="boton">
@@ -50,6 +53,7 @@
                     <td>{{contacto_buscados['nombre']}}</td>
                     <td>{{contacto_buscados['telefono']}}</td>
                     <td>
+                        <a href="/see/{{contacto_buscados['email']}}">Ver</a>
                         <a href="/edit/{{contacto_buscados['email']}}">Editar</a>
                         <a href="/delete/{{contacto_buscados['email']}}">Eliminar</a>
                     </td>
@@ -60,7 +64,7 @@
         <hr size="10" color="black">
         {% endif %}
 
-
+        <h1><b>Contactos</b></h1>
         <table>
             <thead>
                 <tr>
@@ -77,6 +81,7 @@
                     <td>{{contacto['nombre']}}</td>
                     <td>{{contacto['telefono']}}</td>
                     <td>
+                        <a href="/see/{{contacto['email']}}">Ver</a>
                         <a href="/edit/{{contacto['email']}}">Editar</a>
                         <a href="/delete/{{contacto['email']}}">Eliminar</a>
                     </td>
@@ -84,5 +89,6 @@
                 {% endfor %}
             </tbody>
         </table>
+    </center>
     </body>
 </html>
